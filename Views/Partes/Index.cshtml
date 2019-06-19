@@ -1,0 +1,260 @@
+﻿@model PagedList.IPagedList<OSCPartes.Models.Parte>
+@using PagedList.Mvc;
+@using OSCPartes.Configuracion;
+@using OSCPartes.Models;
+@using OSCPartes.App_Data;
+
+@{
+    ViewBag.Title = "Listado de Partes";
+}
+
+<h2>Listado de Partes</h2>
+
+<p>
+    <button type="button" onclick='window.location = "../Partes/Create"' value="Crear Nuevo Parte">
+        <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Parte
+    </button>
+</p>
+
+@using (Html.BeginForm("Index","Partes",FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Mostrar Cerrados: 
+        @if ((ViewBag.CurrentArchivadosFilter as bool?) != null && (ViewBag.CurrentArchivadosFilter as bool?).Value)
+        {
+            @Html.CheckBox("ArchivadosFilter", new { @checked = "" })
+        }
+        else
+        {
+            @Html.CheckBox("ArchivadosFilter") 
+        }
+        <button type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+        <button type="button" id="resetbutton" onclick='window.location = "../Partes"' value="Mostrar Actuales">
+            <i class="glyphicon glyphicon-refresh"></i> Mostrar Actuales
+        </button>
+   </p>
+
+<table class="table">
+    <tr>
+        <th>
+            @if (ViewBag.CurrentSort == "FechaAlta")
+            {
+                @Html.ActionLink("▼Fecha Alta", "Index", new { sortOrder = ViewBag.FechaAltaSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "FechaAlta_desc")
+            {
+                @Html.ActionLink("▲Fecha Alta", "Index", new { sortOrder = ViewBag.FechaAltaSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Fecha Alta", "Index", new { sortOrder = ViewBag.FechaAltaSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Estado")
+            {
+                @Html.ActionLink("▼Estado", "Index", new { sortOrder = ViewBag.EstadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Estado_desc")
+            {
+                @Html.ActionLink("▲Estado", "Index", new { sortOrder = ViewBag.EstadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Estado", "Index", new { sortOrder = ViewBag.EstadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Tipo")
+            {
+                @Html.ActionLink("▼Tipo", "Index", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Tipo_desc")
+            {
+                @Html.ActionLink("▲Tipo", "Index", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Tipo", "Index", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Descripcion")
+            {
+                @Html.ActionLink("▼Descripcion", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Descripcion_desc")
+            {
+                @Html.ActionLink("▲Descripcion", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Descripcion", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "ClienteNombreFiscal")
+            {
+                @Html.ActionLink("▼Nombre Cliente", "Index", new { sortOrder = ViewBag.ClienteNombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "ClienteNombreFiscal_desc")
+            {
+                @Html.ActionLink("▲Nombre Cliente", "Index", new { sortOrder = ViewBag.ClienteNombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Nombre Cliente", "Index", new { sortOrder = ViewBag.ClienteNombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Tecnico")
+            {
+                @Html.ActionLink("▼Tecnico", "Index", new { sortOrder = ViewBag.TecnicoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Tecnico_desc")
+            {
+                @Html.ActionLink("▲Tecnico", "Index", new { sortOrder = ViewBag.TecnicoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Tecnico", "Index", new { sortOrder = ViewBag.TecnicoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Facturado")
+            {
+                @Html.ActionLink("▼F", "Index", new { sortOrder = ViewBag.FacturadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Facturado_desc")
+            {
+                @Html.ActionLink("▲F", "Index", new { sortOrder = ViewBag.FacturadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("F", "Index", new { sortOrder = ViewBag.FacturadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Enviado")
+            {
+                @Html.ActionLink("▼E", "Index", new { sortOrder = ViewBag.EnviadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "Enviado_desc")
+            {
+                @Html.ActionLink("▲E", "Index", new { sortOrder = ViewBag.EnviadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("E", "Index", new { sortOrder = ViewBag.EnviadoSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "FechaFin")
+            {
+                @Html.ActionLink("▼Fecha Fin", "Index", new { sortOrder = ViewBag.FechaFinSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else if (ViewBag.CurrentSort == "FechaFin_desc")
+            {
+                @Html.ActionLink("▲Fecha Fin", "Index", new { sortOrder = ViewBag.FechaFinSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Fecha Fin", "Index", new { sortOrder = ViewBag.FechaFinSortParm, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter })
+            }
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr class="@item.Tipo.Replace(" ", "_").Substring(2)">              
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaAlta)
+        </td>  
+        @{
+            if (item.Estado == "Pendiente")
+            {
+                <td style="background-color:lightgreen">
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            }
+            else if (item.Estado == "En Progreso")
+            {
+                <td style="background-color:lightyellow">
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            }
+            else if (item.Estado == "Finalizado")
+            {
+                <td style="background-color:lightcoral">
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            }
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td title="@item.Descripcion">
+            @{ 
+                if (item.Descripcion.Length > 20)
+                {
+                    item.Descripcion = item.Descripcion.Substring(0, 20) + "...";
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                    
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                }
+            }
+        </td>
+        <td title="@item.ClienteNombreFiscal">
+            @{
+                if (item.ClienteNombreFiscal.Length > 30)
+                {
+                    item.ClienteNombreFiscal = item.ClienteNombreFiscal.Substring(0, 30) + "...";
+                    @Html.DisplayFor(modelItem => item.ClienteNombreFiscal)
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ClienteNombreFiscal)
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tecnico.Nombre)
+        </td>
+        <td>         
+            @Html.DisplayFor(modelItem => item.Facturado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enviado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
+        </td>   
+        <td colspan="2" class="row_buttons" style="width:13%; font-size: medium;padding-top:5px;padding-bottom:5px">
+            <button type="button" onclick='window.location = "../Partes/Edit/@item.Id"'>
+                <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button type="button" onclick='window.location = "../Partes/Details/@item.Id"'>
+                <i class="glyphicon glyphicon-align-justify"></i>
+            </button>
+            <button type="button" onclick='window.location = "../Partes/Delete/@item.Id"'>
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </td>    
+    </tr>
+}
+
+</table>
+   
+}
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0:Model.PageNumber) de @Model.PageCount ( Total: @Model.TotalItemCount )
+
+@Html.PagedListPager(Model, page=>Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentArchivadosFilter = ViewBag.CurrentArchivadosFilter }))

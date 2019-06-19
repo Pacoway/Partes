@@ -1,0 +1,78 @@
+    body{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;        
+    }
+
+    h2{
+        font-size:20px;
+        float:left;
+        margin: 0;
+    }
+    h3{
+        font-size:13px;
+        float:right;
+        margin:0;
+    }
+
+    .table{
+        clear:both;
+        padding-top:10px;
+        font-size:13px;
+        width: 100%;
+        text-align:left;
+    }
+ 
+    p{
+         padding-left: 10px;
+         margin-top:2px;
+         margin-bottom:2px;
+    }
+
+    .lineaNegra{
+        border-bottom:solid;
+        border-width:5px;    
+        margin-bottom:10px;
+    }
+
+    td{
+        margin:auto;
+        padding:0px;
+    }
+
+    .table tbody tr th{
+        box-shadow: none;
+        border: solid;
+        border-width:1px;
+        line-height: initial;
+    }
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    page[size="A4"] {  
+      width: 20cm;
+      height: 28cm; 
+    }
+
+    page {
+      display: block;      
+      margin-bottom: 0.5cm;
+      margin-right:2cm;
+      
+    }
+
+
+    #footer {       
+        position: fixed;
+        bottom: 0;
+        width: inherit;
+        margin-bottom: 20px;
+    }
+
+    #cuerpo{
+        position:relative
+    }
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td{
+    border:none;
+}

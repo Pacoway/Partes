@@ -1,0 +1,36 @@
+﻿@using OSCPartes.Configuracion;
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="row">
+    <h2>Bienvenido a OS Consulting</h2>
+        <h3>Partes</h3>
+            <p>
+                <ul>
+                    <li>@Html.ActionLink("Administrar Partes", "Index", "Partes")</li>
+                </ul>
+
+            </p>
+        <h3>Clientes</h3>
+            <p>
+                <ul>
+                    <li>@Html.ActionLink("Administrar Clientes", "Index", "Clientes")</li>
+                </ul>
+
+            </p>
+        <h3>Técnicos</h3>
+            <p>
+                <ul>
+                    <li>@Html.ActionLink("Administrar Técnicos", "Index", "Tecnicos")</li>
+                </ul>
+
+            </p>
+        <h3>Vehículos</h3>
+            <p>
+                <ul>
+                    <li>@Html.ActionLink("Administrar Vehículos", "Index", "Vehiculos")</li>
+                </ul>
+
+            </p>
+</div>

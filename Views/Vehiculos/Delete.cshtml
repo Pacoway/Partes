@@ -1,0 +1,60 @@
+﻿@model OSCPartes.Models.Vehiculo
+
+@{
+    ViewBag.Title = "Eliminar Vehiculo";
+}
+
+<h2>Eliminar Vehiculo</h2>
+
+<h3>¿Seguro que desea eliminar el Vehiculo?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion, "{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit">
+                <i class="glyphicon glyphicon-remove"></i> Eliminar
+            </button>
+            <button type="button" onclick='window.location = "../"'>
+                <i class="glyphicon glyphicon-list-alt"></i> Listado
+            </button>
+        </div>
+    }
+</div>

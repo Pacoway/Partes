@@ -1,0 +1,59 @@
+﻿@model OSCPartes.Models.Vehiculo
+
+@using OSCPartes.Configuracion;
+
+@{
+    ViewBag.Title = "Crear Nuevo Vehiculo";
+    Model.UsuarioCreacion = /*@User.Identity.Name*/ "Francisco";
+}
+
+<h2>Crear Nuevo Vehiculo</h2>
+<hr />
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Matricula, htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Matricula, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsuarioCreacion, "Persona que Crea el Vehiculo", htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UsuarioCreacion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.UsuarioCreacion, "", new { @class = "text-danger" })
+            </div>
+        </div>        
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit">
+                    <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Vehiculo
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button type="button" onclick='window.location = "../Vehiculos"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</div>
+
+

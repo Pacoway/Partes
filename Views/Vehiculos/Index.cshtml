@@ -1,0 +1,116 @@
+﻿@model PagedList.IPagedList<OSCPartes.Models.Vehiculo>
+@using PagedList.Mvc;
+@using OSCPartes.Configuracion;
+@using OSCPartes.Models;
+@using OSCPartes.App_Data;
+
+@{
+    ViewBag.Title = "Listado de Vehiculos";
+}
+
+<h2>Listado de Vehiculos</h2>
+
+<p>
+    <button type="button" onclick='window.location = "../Vehiculos/Create"' value="Crear Nuevo Vehiculo">
+        <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Vehiculo
+    </button>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @if (ViewBag.CurrentSort == "Descripcion")
+            {
+                @Html.ActionLink("▼Descripción", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Descripcion_desc")
+            {
+                @Html.ActionLink("▲Descripción", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Descripción", "Index", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Matricula")
+            {
+                @Html.ActionLink("▼Matricula", "Index", new { sortOrder = ViewBag.MatriculaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Matricula_desc")
+            {
+                @Html.ActionLink("▲Matricula", "Index", new { sortOrder = ViewBag.MatriculaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Matricula", "Index", new { sortOrder = ViewBag.MatriculaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "UsuarioCreacion")
+            {
+                @Html.ActionLink("▼Usuario Creacion", "Index", new { sortOrder = ViewBag.UsuarioCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "UsuarioCreacion_desc")
+            {
+                @Html.ActionLink("▲Usuario Creacion", "Index", new { sortOrder = ViewBag.UsuarioCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Usuario Creacion", "Index", new { sortOrder = ViewBag.UsuarioCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "FechaCreacion")
+            {
+                @Html.ActionLink("▼Fecha Creacion", "Index", new { sortOrder = ViewBag.FechaCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "FechaCreacion_desc")
+            {
+                @Html.ActionLink("▲Fecha Creacion", "Index", new { sortOrder = ViewBag.FechaCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Fecha Creacion", "Index", new { sortOrder = ViewBag.FechaCreacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>   
+        <th></th>          
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioCreacion)
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.FechaCreacion)
+            </td>
+
+            <td colspan="2" class="row_buttons" style="width:14%; font-size: medium;padding-top:5px;padding-bottom:5px">
+                <button type="button" onclick='window.location = "../Vehiculos/Edit/@item.Id"'>
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+                <button type="button" onclick='window.location = "../Vehiculos/Details/@item.Id"'>
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </button>
+                <button type="button" onclick='window.location = "../Vehiculos/Delete/@item.Id"'>
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </td>    
+        </tr>
+    }
+
+</table>
+
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0:Model.PageNumber) de @Model.PageCount ( Total: @Model.TotalItemCount )
+
+@Html.PagedListPager(Model, page=>Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

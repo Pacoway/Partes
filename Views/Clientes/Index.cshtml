@@ -1,0 +1,126 @@
+﻿@model PagedList.IPagedList<OSCPartes.Models.Cliente>
+@using PagedList.Mvc;
+@using OSCPartes.Configuracion;
+@using OSCPartes.Models;
+@using OSCPartes.App_Data;
+
+@{
+    ViewBag.Title = "Listado de Clientes";
+}
+
+<h2>Listado de Clientes</h2>
+
+<p>
+    <button type="button" onclick='window.location = "../Clientes/Create"' value="Crear Nuevo Cliente">
+        <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Cliente
+    </button>
+</p>
+
+@using (Html.BeginForm("Index","Clientes",FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <button type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+        <button type="button" id="resetbutton" onclick="window.location = '../Clientes'" value="Mostrar Todos">
+            <i class="glyphicon glyphicon-refresh"></i> Mostrar Todos
+        </button>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @if (ViewBag.CurrentSort == "Codigo")
+            {
+                @Html.ActionLink("▼Cod.", "Index", new { sortOrder = ViewBag.CodigoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Codigo_desc")
+            {
+                @Html.ActionLink("▲Cod.", "Index", new { sortOrder = ViewBag.CodigoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Cod.", "Index", new { sortOrder = ViewBag.CodigoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>       
+        <th>
+            @if (ViewBag.CurrentSort == "NombreFiscal")
+            {
+                @Html.ActionLink("▼Nombre Fiscal", "Index", new { sortOrder = ViewBag.NombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "NombreFiscal_desc")
+            {
+                @Html.ActionLink("▲Nombre Fiscal", "Index", new { sortOrder = ViewBag.NombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Nombre Fiscal", "Index", new { sortOrder = ViewBag.NombreFiscalSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>      
+        <th>
+            @if (ViewBag.CurrentSort == "PersonaContacto")
+            {
+                @Html.ActionLink("▼Contacto", "Index", new { sortOrder = ViewBag.PersonaContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "PersonaContacto_desc")
+            {
+                @Html.ActionLink("▲Contacto", "Index", new { sortOrder = ViewBag.PersonaContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Contacto", "Index", new { sortOrder = ViewBag.PersonaContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "TelefonoContacto")
+            {
+                @Html.ActionLink("▼Teléfono", "Index", new { sortOrder = ViewBag.TelefonoContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "TelefonoContacto_desc")
+            {
+                @Html.ActionLink("▲Teléfono", "Index", new { sortOrder = ViewBag.TelefonoContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Teléfono", "Index", new { sortOrder = ViewBag.TelefonoContactoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Codigo)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreFiscal)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoPersona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoTelefono)
+        </td>       
+        <td colspan="2" class="row_buttons" style="width:14%; font-size: medium;padding-top:5px;padding-bottom:5px">
+            <button type="button" onclick='window.location = "../Clientes/Edit/@item.Id"'>
+                <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+            <button type="button" onclick='window.location = "../Clientes/Details/@item.Id"'>
+                <i class="glyphicon glyphicon-align-justify"></i>
+            </button>
+            <button type="button" onclick='window.location = "../Clientes/Delete/@item.Id"'>
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </td>    
+    </tr>
+}
+</table>
+
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0:Model.PageNumber) de @Model.PageCount ( Total: @Model.TotalItemCount )
+
+@Html.PagedListPager(Model, page=>Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

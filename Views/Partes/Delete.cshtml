@@ -1,0 +1,172 @@
+﻿@model OSCPartes.Models.Parte
+
+@{
+    ViewBag.Title = "Eliminar Parte";
+}
+
+<h2>Eliminar Parte</h2>
+
+<h3>¿Seguro que desea eliminar el Vehiculo?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteCodigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteCodigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteNIF)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteNIF)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteNombreFiscal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteNombreFiscal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteNombreComercial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteNombreComercial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteDomicilio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteDomicilio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteCP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteCP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientePoblacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientePoblacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteProvincia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteProvincia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientePais)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientePais)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteContactoPersona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteContactoPersona)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteContactoTelefono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteContactoTelefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteContactoEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteContactoEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tecnico)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tecnico.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaAlta, "{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaFin, "{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasString)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HorasString)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KmsString)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KmsString)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Facturado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Facturado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Enviado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Enviado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion, "{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit">
+                <i class="glyphicon glyphicon-remove"></i> Eliminar
+            </button>
+            <button type="button" onclick='window.location = "../"'>
+                <i class="glyphicon glyphicon-list-alt"></i> Listado
+            </button>
+        </div>
+    }
+</div>

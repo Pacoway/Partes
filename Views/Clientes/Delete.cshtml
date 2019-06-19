@@ -1,0 +1,111 @@
+﻿@model OSCPartes.Models.Cliente
+
+@{
+    ViewBag.Title = "Eliminar Cliente";
+}
+
+<h2>Eliminar Cliente</h2>
+
+<h3>¿Seguro que desea eliminar el cliente?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NIF)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NIF)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreFiscal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreFiscal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreComercial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreComercial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Domicilio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Domicilio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Poblacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Poblacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Provincia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Provincia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoPersona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoPersona)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoTelefono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoTelefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion, "{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit">
+                <i class="glyphicon glyphicon-remove"></i> Eliminar
+            </button>
+            <button type="button" onclick='window.location = "../"'>
+                <i class="glyphicon glyphicon-list-alt"></i> Listado
+            </button>
+        </div>
+    }
+</div>

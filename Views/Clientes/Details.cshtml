@@ -1,0 +1,136 @@
+﻿@model OSCPartes.Models.Cliente
+
+@{
+    ViewBag.Title = "Detalles del Cliente";
+}
+
+<h2>Detalles del Cliente</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NIF)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NIF)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreFiscal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreFiscal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreComercial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreComercial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Domicilio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Domicilio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Poblacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Poblacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Provincia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Provincia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoPersona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoPersona)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoTelefono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoTelefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactoEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactoEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion,"{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+    </dl>
+</div>
+<h4>Histórico</h4>
+<table class="table">
+    <tr>
+        <th>
+            Fecha de Actualización            
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Usuario
+        </th>
+    </tr>
+
+    @foreach (var item in Model.HistoricosClientes)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    <button type="button" onclick='window.location = "../Edit/@Model.Id"'>
+        <i class="glyphicon glyphicon-pencil"></i> Editar
+    </button>
+    <button type="button" onclick='window.location = "../"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</p>

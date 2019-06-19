@@ -1,0 +1,86 @@
+﻿@model OSCPartes.Models.Tecnico
+
+@{
+    ViewBag.Title = "Detalles del Tecnico";
+}
+
+<h2>Detalles del Parte</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion,"{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+      
+
+    </dl>
+</div>
+<h4>Histórico</h4>
+<table class="table">
+    <tr>
+        <th>
+            Fecha de Actualización            
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Usuario Logeado
+        </th>
+    </tr>
+
+    @foreach (var item in Model.HistoricosTecnicos)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    <button type="button" onclick='window.location = "../Edit/@Model.Id"'>
+        <i class="glyphicon glyphicon-pencil"></i> Editar
+    </button>
+    <button type="button" onclick='window.location = "../"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</p>

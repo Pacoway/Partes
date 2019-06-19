@@ -1,0 +1,194 @@
+﻿@model OSCPartes.Models.Parte
+<html>
+<head>
+    @Styles.Render("~/Content/bootstrapPrint.css")
+    @Styles.Render("~/Content/Print.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @{
+        Layout = null;
+        ViewBag.Title = "Listado de Partes";
+    }
+
+</head>
+<body>
+
+
+    <page size="A4">
+        <div id="cuerpo" class="container">
+            <div style="margin-top:50px" class="navbar-header col-lg-12">
+                <img class="navbar-brand col-lg-12" style="width:75%" src="\logoprint.png" />
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <p style="border:solid;border-width: 1px;padding-left: 10px;font-weight:bold">DATOS OS CONSULTING</p>
+                        <p>C/ Villanueva de los Castillejos, 9 Local</p>
+                        <p>C.I.F.: B21480991</p>
+                        <p>C.P.: 21006 &nbsp; &nbsp; &nbsp; Huelva</p>
+                        <p>Teléfono: 959226192 Ext. 2</p>
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <p style="border:solid;border-width: 1px;padding-left: 10px;font-weight:bold">DATOS DEL CLIENTE</p>
+                        <p>@Html.DisplayFor(model => model.ClienteNombreFiscal)</p>
+                        <p>N.I.F.: @Html.DisplayFor(model => model.ClienteNIF) &nbsp; &nbsp; &nbsp; Telefono: @Html.DisplayFor(model => model.ClienteContactoTelefono) </p>
+                        <p>@Html.DisplayFor(model => model.ClienteDomicilio)&nbsp;</p>
+                        <p>C.P.: @Html.DisplayFor(model => model.ClienteCP) &nbsp; &nbsp; &nbsp; @Html.DisplayFor(model => model.ClientePoblacion) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Html.DisplayFor(model => model.ClienteProvincia)</p>
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <table class="table" style="margin:auto">
+                            <tr style="border:solid; border-width:1px">
+                                <th style="border-right:none;padding:0px;padding-left:8px;">Nº Parte: @Model.Id</th>
+                                <th style="border-right:none;border-left:none;padding:0px;padding-left:8px;">TIPO DE INTERVENCIÓN: @Model.Tipo</th>
+                                <th style="border-left:none;padding:0px;padding-left:8px;">TÉCNICO ENCARGADO: @Model.Tecnico.Nombre</th>
+                            </tr>
+                        </table>
+                        <p>DATOS DE LA AVERÍA: @Html.DisplayFor(model => model.Descripcion)</p>
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <table class="table" style="margin:auto">
+                            <tr id="lineas" style="border:solid; border-width:1px; font-weight:bold" class="col-lg-12">
+                                <td class="col-lg-2">FECHA</td>
+                                <td>TÉCNICOS</td>
+                                <td>VEHÍCULOS</td>
+                                <td>INICIO</td>
+                                <td>FIN</td>
+                                <td>HORAS</td>
+                                <td>KM</td>
+                                <td>TIPO</td>
+                            </tr>
+                            @{
+                                var lineas = from p in Model.PartesLineas select p;
+                                foreach (var item in lineas)
+                                {
+                                    <tr class="col-lg-12">
+                                        <td class="col-lg-2" style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.Fecha)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.ResumenTecnicos)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.ResumenVehiculos)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.VerHoraInicio)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.VerHoraFin)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.HorasString)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.KM)
+                                        </td>
+                                        <td style="padding:0px;padding-left:8px;">
+                                            @Html.DisplayFor(model => item.Tipo)
+                                        </td>
+                                    </tr>
+
+                                    <tr><td colspan="8" style="border-bottom:solid;border-bottom-width:1px;border-bottom-color:lightgray;padding:0px;padding-left:8px;padding-bottom:5px">TRABAJO REALIZADO: @Html.DisplayFor(model => item.Descripcion)</td></tr>
+                                }
+                            }
+                        </table>
+
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <table class="table" style="margin:auto">
+                            <tr style="border:solid; border-width:1px">
+                                <th style="border-right:none;padding:0px;padding-left:8px;">DURACIÓN DE LA INTERVENCIÓN</th>
+                                <th style="border-right:none;border-left:none;padding:0px;padding-left:8px;">TOTAL HORAS</th>
+                                @{
+                                    if (Model.Tipo == "Por Horas")
+                                    {
+                                        <th style="border-left:none;padding:0px;padding-left:8px;">HORAS FACTURABLES</th>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td style="padding:0px;padding-left:8px;">Desde @Html.DisplayFor(model => model.FechaAlta) hasta @Html.DisplayFor(model => model.FechaFin)</td>
+                                <td style="padding:0px;padding-left:8px;">@Html.DisplayFor(model => model.HorasString)</td>
+                                @{
+                                    if (Model.Tipo == "Por Horas")
+                                    {
+                                        <td style="padding:0px;padding-left:8px;">@Html.DisplayFor(model => model.HorasFacturablesString)</td>
+                                    }
+                                }
+                            </tr>
+                        </table>
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer" class="container">
+            <div class="col-lg-3"> &nbsp; </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="content" style="padding-left:10px">
+                        <p style="border:solid;border-width: 1px;padding-left: 10px;text-align:center;font-weight:bold">FIRMA CLIENTE</p>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p class="lineaNegra"></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </page>
+    
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>                   
+      
+            $(document).scroll(function () {
+             
+                if ($('#cuerpo').height() < (1090 - 150)) {
+                    $('#footer').css({ position: 'fixed' })
+                }
+                else {
+                    $('#footer').css({ position: 'relative' })
+                }
+            })
+      
+    </script>    
+       
+</body>
+</html>

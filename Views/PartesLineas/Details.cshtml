@@ -1,0 +1,124 @@
+﻿@model OSCPartes.Models.ParteLinea
+
+@{
+    ViewBag.Title = "Detalles de la linea del Parte";
+}
+
+<h2>Detalles de la linea del Parte</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IDParte)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IDParte)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumenTecnicos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResumenTecnicos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumenVehiculos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResumenVehiculos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VerHoraInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VerHoraInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VerHoraFin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VerHoraFin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KM)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KM)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd>
+            @Html.FormatValue(Model.FechaCreacion,"{0:dd/MM/yyyy HH:mm:ss}")
+        </dd>
+    </dl>
+</div>
+<h4>Histórico</h4>
+<table class="table">
+    <tr>
+        <th>
+            Fecha de Actualización            
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Usuario
+        </th>
+    </tr>
+
+    @foreach (var item in Model.HistoricosPartesLineas)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    <button type="button" onclick='window.location = "../Edit/@Model.Id?idParte=@Model.IDParte"'>
+        <i class="glyphicon glyphicon-pencil"></i> Editar
+    </button>
+    <button type="button" onclick='window.location = "../../Partes/Details/@Model.IDParte"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</p>

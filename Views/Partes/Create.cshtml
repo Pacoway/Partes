@@ -1,0 +1,190 @@
+﻿@model OSCPartes.Models.Parte
+
+@using OSCPartes.Configuracion;
+
+@{
+    ViewBag.Title = "Crear Nuevo Parte";
+    Model.UsuarioCreacion = /*@User.Identity.Name*/ "Francisco";
+}
+
+<h2>Crear Nuevo Parte</h2>
+<hr />
+
+        @Html.LabelFor(model => model.ClienteSeleccionado, htmlAttributes: new { @class = "col-md-3 text-left" })
+        @using (Html.BeginForm("Create", "Partes", FormMethod.Get))
+        {
+            <div class="form-horizontal col-md-10">
+                <div class="form-group">
+                    @Html.TextBox("searchCliente", ViewBag.searchCliente as string, htmlAttributes: new { @class = "form-control col-md-3 text-left" })
+                    <button type="submit" style = "padding-bottom:5px;padding-top:5px;padding-left:8px;padding-right:8px;">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+         }
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group" id="cliente_input">
+
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.ClienteSeleccionado, Model.Clientes, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ClienteSeleccionado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="tecnico_input">
+                            @Html.LabelFor(model => model.TecnicoSeleccionado, htmlAttributes: new { @class = "col-md-3 text-left" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.TecnicoSeleccionado, Model.Tecnicos, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TecnicoSeleccionado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaAlta, "Fecha de inicio del Parte", htmlAttributes: new { @class = "col-md-3 text-left" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FechaAlta, new { htmlAttributes = new { @class = "datefield form-control", type = "date" } })
+                                @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaFin, "Fecha de finalización del Parte", htmlAttributes: new { @class = "col-md-3 text-left" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "datefield form-control", type = "date" } })
+                                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="tipo_input">
+                            @Html.LabelFor(model => model.TipoSeleccionado, htmlAttributes: new { @class = "col-md-3 text-left" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.TipoSeleccionado, Model.Tipos, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TipoSeleccionado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="horas_facturables_input">
+                            @Html.LabelFor(model => model.HorasFacturables, "Horas Facturables", htmlAttributes: new { @class = "col-md-3 text-left" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.HorasFacturables, new { htmlAttributes = new { @id = "HorasFacturables", @class = "datefield form-control", type = "datetime" } })
+                                @Html.ValidationMessageFor(model => model.HorasFacturables, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                            <div class="form-group" >
+                                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "col-md-3 text-left" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Facturado, htmlAttributes: new { @class = "col-md-3 text-left" })
+                                <div class="col-md-10">
+                                    @Html.CheckBoxFor(model => model.Facturado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Facturado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Enviado, htmlAttributes: new { @class = "col-md-3 text-left" })
+                                <div class="col-md-10">
+                                    @Html.CheckBoxFor(model => model.Enviado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Enviado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="estado_input">
+                                @Html.LabelFor(model => model.EstadoSeleccionado, htmlAttributes: new { @class = "col-md-3 text-left" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.EstadoSeleccionado, Model.Estados, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.EstadoSeleccionado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UsuarioCreacion, "Persona que Crea el Parte", htmlAttributes: new { @class = "col-md-3 text-left" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.UsuarioCreacion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.UsuarioCreacion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <button type="submit">
+                                        <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Parte
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                }
+
+                <div>
+                    <button type="button" onclick='window.location = "../Partes"'>
+                        <i class="glyphicon glyphicon-list-alt"></i> Listado
+                    </button>
+                </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            if ($('#TipoSeleccionado option:selected').text() != "Por Horas") {
+                $('#horas_facturables_input').hide();
+            }
+
+            $('#HorasFacturables').click(function () {
+                $('#HorasFacturables').val("");
+            });
+
+            $('#HorasFacturables').change(function () {
+                var resultTime = "";
+                var text = $('#HorasFacturables').val().replace(":", "").substring(0, 4);
+                var horas = text.substring(0, 2);
+                if (horas.length == 0) {
+                    horas = "00";
+                }
+                if (horas.length == 1) {
+                    horas = "0" + horas;
+                }
+                var minutos = text.substring(2, 4);
+
+                if (parseInt(minutos) > 59) {
+                    minutos = 59;
+                }
+                else if (minutos == "00") {
+                    minutos = "00";
+                }
+                else if (parseInt(minutos) >= 0 && parseInt(minutos) < 10) {
+                    minutos = "0" + minutos;
+                }
+                else if (minutos == "") {
+                    minutos = "00";
+                }
+                resultTime = horas + ":" + minutos;
+                $('#HorasFacturables').val(resultTime);
+            });
+            $('#TipoSeleccionado').change(function () {
+                if($('#TipoSeleccionado option:selected').text() == "Por Horas"){
+                    $('#horas_facturables_input').show();
+                }
+                else {
+                    $('#horas_facturables_input').hide();
+                }
+            })
+        });              
+       
+    </script>
+
+}

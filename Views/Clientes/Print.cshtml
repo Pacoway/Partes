@@ -1,0 +1,66 @@
+﻿@model IEnumerable< OSCPartes.Models.Cliente>
+@using PagedList.Mvc;
+@using OSCPartes.Configuracion;
+@using OSCPartes.Models;
+@using OSCPartes.App_Data;
+<link href="~/Content/Print.css" rel="stylesheet" type="text/css"/>
+
+@{
+    Layout = null;
+    ViewBag.Title = "Listado de Clientes";
+}
+
+<h2>Listado de Clientes</h2><h3>Actualizado a @String.Format("{0:dd/MM/yyy HH:mm:ss}", DateTime.Now)</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Cod.")
+        </th>
+        <th>
+            @Html.Raw("NIF")
+        </th>
+        <th>
+            @Html.Raw("N.Fiscal")
+        </th>
+        <th>
+            @Html.Raw("N.Comercial")
+        </th>
+        <th>
+            @Html.Raw("Contacto")
+        </th>
+        <th>
+            @Html.Raw("Teléfono")
+        </th>
+        <th>
+            @Html.Raw("Email")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreFiscal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreComercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoPersona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoTelefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactoEmail)
+        </td>
+    </tr>
+}
+
+</table>

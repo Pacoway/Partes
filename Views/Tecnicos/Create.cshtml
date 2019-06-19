@@ -1,0 +1,59 @@
+﻿@model OSCPartes.Models.Tecnico  
+
+@using OSCPartes.Configuracion;
+
+@{
+    ViewBag.Title = "Crear Nuevo Tecnico";
+    Model.UsuarioCreacion = /*@User.Identity.Name*/ "Francisco";
+}
+
+<h2>Crear Nuevo Tecnico</h2>
+<hr />
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsuarioCreacion, "Persona que Crea el Tecnico", htmlAttributes: new { @class = "col-md-3 text-left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UsuarioCreacion, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.UsuarioCreacion, "", new { @class = "text-danger" })
+            </div>
+        </div>        
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit">
+                    <i class="glyphicon glyphicon-plus"></i> Crear Nuevo Tecnico
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button type="button" onclick='window.location = "../Tecnicos"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</div>
+
+

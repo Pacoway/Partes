@@ -1,0 +1,132 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select {
+    max-width: 280px;
+}
+
+.navbar-header img{
+    padding:0;
+    margin-right:10px;
+    margin-left:10px !important;
+    height:50px;
+    width:50px;
+}
+
+.navbar-collapse{
+    padding:0;
+}
+
+.nav{
+    width:100%;
+}
+
+.navbar-nav{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.collapsing .navbar-nav{
+    padding-left:15px;
+}
+
+.in .navbar-nav{
+    padding-left:15px;
+}
+
+.navbar-nav > li{
+    min-width:180px;
+    padding: 10px 10px 10px 0;
+    color: #999999;
+}
+
+.collapse .navbar-nav > li{
+    cursor: pointer;
+}
+
+.collapse .navbar-nav > li:hover {
+    color:#fff;
+}
+
+.navbar-nav > li ul{    
+    background-color: #222222;
+    padding: 5px;
+}
+
+.collapse .navbar-nav > li ul{
+    left: -10000px;
+    position: absolute;
+}
+
+ul.nav > li:hover ul{
+    left: 0;    
+}
+
+.navbar-nav > li ul li{
+    list-style:none;
+    padding:5px;
+}
+
+.navbar-nav > li ul li a{
+    color:#999999;
+    text-decoration: none;
+}
+
+.navbar-nav > li ul li a:hover{
+    color:#FFF;
+}
+
+table{
+    font-size: 12px;
+}
+.leyenda{
+    text-align:right;
+    float:right;
+}
+.leyenda span{
+    margin-left:10px;
+    padding: 3px 7px;
+}
+.Clientes{
+    background-color: #f16a6a;
+}
+.Pisos{
+    background-color: #ffee93;
+}
+.Internos{
+    background-color: #99d3fc;
+}
+.Larga_Estancia{
+    background-color: #6ce47c;
+}
+.row_buttons{
+    background-color: #fff;
+}
+
+.elapsed{
+    float:right;
+    color: #999999;
+    padding-right:15px;
+    text-align:right;
+}
+
+textarea.form-control {
+    width: 280px;
+}

@@ -1,0 +1,485 @@
+﻿@model OSCPartes.Models.Parte
+
+@{
+    ViewBag.Title = "Detalles del Parte";
+}
+
+<button type="button" id="printbutton" value="Imprimir" onclick="window.open('@Url.Action("generarPDF", "Partes", new { id = Model.Id, target = "_blank" })')">
+    <i class="glyphicon glyphicon-print"></i> generarPDF
+</button>
+
+
+    
+@{ 
+    if (!Model.Enviado)
+    {
+
+        <button type="button" id="enviarCorreoButton" value="enviarCorreo" onclick="window.location = '../SendMail/@Model.Id'">
+            <i class="glyphicon glyphicon-send"></i> Enviar Correo
+        </button>
+    }
+
+    if (Model.EmailTextInfo!= null && Model.EmailTextInfo != "")
+    {
+        <span>@Model.EmailTextInfo</span>
+    }
+}
+
+
+
+<h2>Detalles del Parte</h2>
+
+<div class="row">
+    <hr />
+    <dl class="dl-horizontal">
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+
+        </span>
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteCodigo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClienteCodigo)
+            </dd>
+        </span>       
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteNombreFiscal)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClienteNombreFiscal)
+            </dd>
+        </span>
+               
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteContactoPersona)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClienteContactoPersona)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteContactoTelefono)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClienteContactoTelefono)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteContactoEmail)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClienteContactoEmail)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Tecnico)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tecnico.Nombre)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaAlta)
+            </dt>
+            <dd>
+                @Html.FormatValue(Model.FechaAlta, "{0:dd/MM/yyyy HH:mm:ss}")
+            </dd>
+        </span>
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </dt>
+        @{ 
+            if(Model.FechaFin != null)
+            {
+                <dd>
+                    @Html.FormatValue(Model.FechaFin, "{0:dd/MM/yyyy HH:mm:ss}")
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    Sin Finalizar
+                </dd>
+            }
+        }
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tipo)
+            </dd>
+        </span>
+
+
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.HorasString)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HorasString)
+            </dd>
+        </span>
+
+        @{ 
+            if (Model.Tipo == "Por Horas")
+            {
+                <span class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HorasFacturablesString)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HorasFacturablesString)
+                    </dd>
+                </span>
+            }
+        }
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.KmsString)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.KmsString)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Facturado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Facturado)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Enviado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Enviado)
+            </dd>
+        </span>
+
+        <span class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+        </span>        
+    </dl>
+</div>
+<div class="col-md-12" style="margin-top:20px">
+    <span class="col-md-12">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </span>
+</div>
+<br />
+<button type="button" onclick='window.location = "../../PartesLineas/Create/@Model.Id"' value="Crear Nueva Linea de Parte">
+    <i class="glyphicon glyphicon-plus"></i> Crear Nueva linea de Parte
+</button>
+<h4>Actuaciones</h4>
+<table class="table">
+    <tr>
+        <th>
+            @if (ViewBag.CurrentSort == "Fecha")
+            {
+                @Html.ActionLink("▼Fecha", "Details", new { sortOrder = ViewBag.FechaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Fecha_desc")
+            {
+                @Html.ActionLink("▲Fecha", "Details", new { sortOrder = ViewBag.FechaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Fecha", "Details", new { sortOrder = ViewBag.FechaSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Tecnicos")
+            {
+                @Html.ActionLink("▼Técnicos", "Details", new { sortOrder = ViewBag.TecnicosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Tecnicos_desc")
+            {
+                @Html.ActionLink("▲Técnicos", "Details", new { sortOrder = ViewBag.TecnicosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Técnicos", "Details", new { sortOrder = ViewBag.TecnicosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Vehiculos")
+            {
+                @Html.ActionLink("▼Vehículos", "Details", new { sortOrder = ViewBag.VehiculosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Vehiculos_desc")
+            {
+                @Html.ActionLink("▲Vehículos", "Details", new { sortOrder = ViewBag.VehiculosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Vehículos", "Details", new { sortOrder = ViewBag.VehiculosSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Inicio")
+            {
+                @Html.ActionLink("▼Inicio", "Details", new { sortOrder = ViewBag.InicioSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Inicio_desc")
+            {
+                @Html.ActionLink("▲Inicio", "Details", new { sortOrder = ViewBag.InicioSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Inicio", "Details", new { sortOrder = ViewBag.InicioSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Fin")
+            {
+                @Html.ActionLink("▼Fin", "Details", new { sortOrder = ViewBag.FinSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Fin_desc")
+            {
+                @Html.ActionLink("▲Fin", "Details", new { sortOrder = ViewBag.FinSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Fin", "Details", new { sortOrder = ViewBag.FinSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Horas")
+            {
+                @Html.ActionLink("▼Horas", "Details", new { sortOrder = ViewBag.HorasSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Horas_desc")
+            {
+                @Html.ActionLink("▲Horas", "Details", new { sortOrder = ViewBag.HorasSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Horas", "Details", new { sortOrder = ViewBag.HorasSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Km")
+            {
+                @Html.ActionLink("▼Kms", "Details", new { sortOrder = ViewBag.KmSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Km_desc")
+            {
+                @Html.ActionLink("▲Kms", "Details", new { sortOrder = ViewBag.KmSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Kms", "Details", new { sortOrder = ViewBag.KmSortParm, currentFilter = ViewBag.CurrentFilter })
+            }            
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Tipo")
+            {
+                @Html.ActionLink("▼Tipo", "Details", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Tipo_desc")
+            {
+                @Html.ActionLink("▲Tipo", "Details", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Tipo", "Details", new { sortOrder = ViewBag.TipoSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th>
+            @if (ViewBag.CurrentSort == "Descripcion")
+            {
+                @Html.ActionLink("▼Descripción", "Details", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else if (ViewBag.CurrentSort == "Descripcion_desc")
+            {
+                @Html.ActionLink("▲Descripción", "Details", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+            else
+            {
+                @Html.ActionLink("Descripción", "Details", new { sortOrder = ViewBag.DescripcionSortParm, currentFilter = ViewBag.CurrentFilter })
+            }
+        </th>
+        <th colspan="2"></th>
+    </tr>
+
+    @{ 
+        var lineas = from p in Model.PartesLineas select p;
+
+        if (ViewBag.CurrentSort == "Fecha") { lineas = lineas.OrderBy(l => l.Fecha); }
+        else if (ViewBag.CurrentSort == "Fecha_desc") { lineas = lineas.OrderByDescending(l => l.Fecha); }
+
+        /*
+        else if (ViewBag.CurrentSort == "Tecnicos") { lineas = lineas.OrderBy(l => l.PartesLineasTecnicos); }
+        else if (ViewBag.CurrentSort == "Tecnicos_desc") { lineas = lineas.OrderByDescending(l => l.PartesLineasTecnicos); }
+
+        else if (ViewBag.CurrentSort == "Vehiculos") { lineas = lineas.OrderBy(l => l.PartesLineasVehiculos); }
+        else if (ViewBag.CurrentSort == "Vehiculos_desc") { lineas = lineas.OrderByDescending(l => l.PartesLineasVehiculos); }
+        */
+
+        else if (ViewBag.CurrentSort == "Inicio") { lineas = lineas.OrderBy(l => l.HoraInicio).ThenBy(l=>l.MinutosInicio); }
+        else if (ViewBag.CurrentSort == "Inicio_desc") { lineas = lineas.OrderByDescending(l => l.HoraInicio).ThenByDescending(l=>l.MinutosInicio); }
+
+        else if (ViewBag.CurrentSort == "Fin") { lineas = lineas.OrderBy(l => l.HoraFin).ThenBy(l=>l.MinutosFin); }
+        else if (ViewBag.CurrentSort == "Fin_desc") { lineas = lineas.OrderByDescending(l => l.HoraFin).ThenByDescending(l=>l.MinutosFin); }
+
+        else if (ViewBag.CurrentSort == "Horas") { lineas = lineas.OrderBy(l => l.Horas); }
+        else if (ViewBag.CurrentSort == "Horas_desc") { lineas = lineas.OrderByDescending(l => l.Horas); }
+
+        else if (ViewBag.CurrentSort == "Km") { lineas = lineas.OrderBy(l => l.KM); }
+        else if (ViewBag.CurrentSort == "Km_desc") { lineas = lineas.OrderByDescending(l => l.KM); }
+
+        else if (ViewBag.CurrentSort == "Tipo") { lineas = lineas.OrderBy(l => l.Tipo); }
+        else if (ViewBag.CurrentSort == "Tipo_desc") { lineas = lineas.OrderByDescending(l => l.Tipo); }
+
+        else if (ViewBag.CurrentSort == "Descripcion") { lineas = lineas.OrderBy(l => l.Descripcion); }
+        else if (ViewBag.CurrentSort == "Descripcion_desc") { lineas = lineas.OrderByDescending(l => l.Descripcion); }
+
+    }
+
+    @foreach (var item in lineas)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyy}", item.Fecha)
+            </td>
+            <td>
+                @{
+                    bool firstTecnico = true;
+                }
+                @foreach (var tecnico in item.PartesLineasTecnicos)
+                {
+                    if (!firstTecnico)
+                    { 
+                        @Html.Raw(", ") 
+                    }
+                    @Html.DisplayFor(modelItem => tecnico.Tecnico.Nombre)
+                    firstTecnico = false;
+                }
+            </td>
+            <td>
+                @{
+                    bool firstVehiculo = true;
+                }
+                @foreach (var vehiculo in item.PartesLineasVehiculos)
+                {
+                    if (!firstVehiculo)
+                    {
+                        @Html.Raw(", ")
+                    }
+                    @Html.DisplayFor(modelItem => vehiculo.Vehiculo.Descripcion)
+                    firstVehiculo = false;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerHoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VerHoraFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td colspan="2" class="row_buttons" style="width:13%; font-size: medium;padding-top:5px;padding-bottom:5px">
+                <button onclick='window.location = "../../PartesLineas/Edit/@item.Id?idParte=@item.IDParte"'>
+                    <i class="glyphicon glyphicon-pencil"></i>                    
+                </button>
+                <button onclick='window.location = "../../PartesLineas/Details/@item.Id"'>
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </button>
+                <button onclick='window.location = "../../PartesLineas/Delete/@item.Id"'>
+                    <i class="glyphicon glyphicon-remove"></i>
+               </button>
+               
+            </td>
+        </tr>
+    }
+
+</table>
+<h4>Histórico</h4>
+<table class="table">
+    <tr>
+        <th>
+            Fecha de Actualización            
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Usuario
+        </th>
+    </tr>
+
+    @foreach (var item in Model.HistoricosPartes)
+    {
+        <tr>
+            <td>
+                @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<p>
+    <button type="button" onclick='window.location = "../Edit/@Model.Id"'>
+        <i class="glyphicon glyphicon-pencil"></i> Editar
+    </button>
+    <button type="button" onclick='window.location = "../"'>
+        <i class="glyphicon glyphicon-list-alt"></i> Listado
+    </button>
+</p>

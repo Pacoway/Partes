@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - OS Consulting</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")   
+    @using OSCPartes.Configuracion;
+</head>
+<body>
+
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="elapsed">Actualizado a @String.Format("{0:dd/MM/yyy HH:mm:ss}", DateTime.Now)<br />Conectado como <!--@User.Identity.Name--> Francisco</div>
+            <div class="navbar-header">
+                <img class="navbar-brand" src="\logo.png"/>
+                @Html.ActionLink("OS Consulting", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })                
+            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>Partes de Mantenimiento
+                        <ul>
+                            <li>@Html.ActionLink("Administrar Partes", "Index", "Partes")</li>
+                        </ul>
+                    </li>
+                    <li>Clientes
+                        <ul>
+                            <li>@Html.ActionLink("Administrar Clientes", "Index", "Clientes")</li>
+                        </ul>
+                    </li>
+                    <li>Técnicos
+                        <ul>
+                            <li>@Html.ActionLink("Administrar Técnicos", "Index", "Tecnicos")</li>
+                        </ul>
+                    </li>
+                    <li>Vehículos
+                        <ul>
+                            <li>@Html.ActionLink("Administrar Vehículos", "Index", "Vehiculos")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - OSConsulting.es</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

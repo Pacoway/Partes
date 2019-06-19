@@ -1,0 +1,48 @@
+﻿@model IEnumerable< OSCPartes.Models.Vehiculo>
+@using PagedList.Mvc;
+@using OSCPartes.Configuracion;
+@using OSCPartes.Models;
+@using OSCPartes.App_Data;
+<link href="~/Content/Print.css" rel="stylesheet" type="text/css"/>
+
+@{
+    Layout = null;
+    ViewBag.Title = "Listado de Vehiculos";
+}
+
+<h2>Listado de Vehiculos</h2><h3>Actualizado a @String.Format("{0:dd/MM/yyy HH:mm:ss}", DateTime.Now)</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Descripcion")
+        </th>
+        <th>
+            @Html.Raw("Matricula")
+        </th>
+        <th>
+            @Html.Raw("Usuario Alta")
+        </th>
+        <th>
+            @Html.Raw("Fecha Alta")
+        </th>       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>      
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioCreacion)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yyy HH:mm:ss}", item.FechaCreacion)
+        </td>
+    </tr>
+}
+
+</table>
